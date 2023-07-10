@@ -2,10 +2,8 @@
 ### group_vars/AVD_FABRIC.yml
 
 fabric_name: ATD_FABRIC
-
 # Enable vlan aware bundles
 evpn_vlan_aware_bundles: true
-
 # Select rfc5549 or ospf, not both
 
 # underlay_rfc5549: true
@@ -26,16 +24,13 @@ bgp_peer_groups:
     password: "q+VNViP5i4rVjW1cxFv2wA=="
   mlag_ipv4_underlay_peer:
     password: "vnEaG8gMeQf3d3cN6PktXQ=="
-
 bgp_graceful_restart:
   enabled: true
   restart_time: 300
-
 bgp_distance:
   external_routes: 20
   internal_routes: 200
   local_routes: 200
-
 # Spine Switches
 spine:
   defaults:
@@ -50,11 +45,9 @@ spine:
     - name: spine2
       id: 2
       mgmt_ip: 192.168.0.11/24
-
 # Leaf switch groups
 # A maximum of two nodes can form a leaf group
 # When two nodes are in a leaf group this will automatically form mlag pair
-
 l3leaf:
   defaults:
     platform: vEOS-lab
@@ -72,7 +65,7 @@ l3leaf:
     spanning_tree_mode: mstp
     spanning_tree_priority: 16384
     filter:
-      # only_vlans_in_use: true
+    # only_vlans_in_use: true
   node_groups:
     - group: pod1
       bgp_as: 65101
@@ -85,25 +78,24 @@ l3leaf:
           id: 2
           mgmt_ip: 192.168.0.13/24
           uplink_switch_interfaces: [Ethernet3, Ethernet3]
-    # part of ATD lab topology is disabled
-    # to minimize resource requirements on gihub codespaces
-    # following devices are disabled:
-    #   leaf3, leaf4, host1, host2
-    # uncomment the lines below to enable them
-    # if the lab is running on a machine with enough resources or in ATD
-    # ---------------------------------------------------------------
-    # - group: pod2
-    #   bgp_as: 65102
-    #   nodes:
-    #     - name: leaf3
-    #       id: 3
-    #       mgmt_ip: 192.168.0.14/24
-    #       uplink_switch_interfaces: [Ethernet4, Ethernet4]
-    #     - name: leaf4
-    #       id: 4
-    #       mgmt_ip: 192.168.0.15/24
-    #       uplink_switch_interfaces: [Ethernet5, Ethernet5]
-
+  # part of ATD lab topology is disabled
+  # to minimize resource requirements on gihub codespaces
+  # following devices are disabled:
+  #   leaf3, leaf4, host1, host2
+  # uncomment the lines below to enable them
+  # if the lab is running on a machine with enough resources or in ATD
+  # ---------------------------------------------------------------
+  # - group: pod2
+  #   bgp_as: 65102
+  #   nodes:
+  #     - name: leaf3
+  #       id: 3
+  #       mgmt_ip: 192.168.0.14/24
+  #       uplink_switch_interfaces: [Ethernet4, Ethernet4]
+  #     - name: leaf4
+  #       id: 4
+  #       mgmt_ip: 192.168.0.15/24
+  #       uplink_switch_interfaces: [Ethernet5, Ethernet5]
 #### Override for vEOS Lab Caveats ####
 
 # Disable update wait-for-convergence and update wait-for-install,
@@ -112,13 +104,12 @@ l3leaf:
 
 # Update p2p mtu 9000 -> 1500
 p2p_uplinks_mtu: 1500
-
 # Adjust default bfd values
 bfd_multihop:
   interval: 1200
   min_rx: 1200
   multiplier: 3
-
+banner_text: This banner came from group_vars/ATD_FABRIC.yml
 # List of additional CVP configlets to bind to devices and containers
 # Configlets MUST be configured on CVP before running AVD playbooks.
 

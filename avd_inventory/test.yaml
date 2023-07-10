@@ -1,0 +1,12 @@
+---
+string: "just a string"
+integer: 1234
+and_that_is_an_integer_too: 0xABCD
+float: 12.34
+version: "1.0" # is a string
+boolean: true
+# that's super weird, don't do that
+but_that_is_a_string: !!str True
+# there is a special `null` value for this case
+and_this_is_not_empty:
+a_better_null: ~
